@@ -69,7 +69,7 @@ Resources:
            curl -sL https://rpm.nodesource.com/setup_11.x | sudo -E bash -
            yum install -y nodejs
            npm install -g tiddlywiki
-           tiddlywiki wikiwiki --init server
+           sudo tiddlywiki wikiwiki --init server
            wget https://raw.githubusercontent.com/Juan007/cloudformation/master/TiddlyWiki/tiddlywikistartup -O /etc/init.d/tiddlywikistartup
            chmod +x /etc/init.d/tiddlywikistartup
            shutdown -r now

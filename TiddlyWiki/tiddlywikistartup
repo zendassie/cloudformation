@@ -1,2 +1,2 @@
 #!/bin/bash
-tiddlywiki wikiwiki --listen
+sudo tiddlywiki wikiwiki --listen host=0.0.0.0 port=8080
