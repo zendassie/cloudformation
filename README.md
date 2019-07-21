@@ -1,2 +1,2 @@
-# cloudformation-tiddlywiki
-A Cloudformation template to launch a TiddlyWiki site
+# cloudformation
+Various Cloudformation templates
