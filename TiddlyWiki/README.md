@@ -24,8 +24,8 @@ sudo tiddlywiki <YourWikiName> --listen host=0.0.0.0 port=8080 username=<YourUse
 ## Template changes still todo:
 1. Launch TiddlyWiki as a service
 2. Map username and password input parameters to TiddlyWiki
-3. Select existing Route53 domain and create a sub-domain (ex. from mydomain.com, create an alias wiki.mydomain.com)
-4. Map this new domain name to the EC2 IP address
+3. ~~Select existing Route53 domain and create a sub-domain (ex. from mydomain.com, create an alias wiki.mydomain.com)~~
+4. ~~Map this new domain name to the EC2 IP address~~
 5. ~~Create and optional parameter that maps to an existing S3 bucket. This will then backup the wiki and restore from there if there's already data.~~
 
 Once the above is done, the **Initial Setup** will no longer be needed and you will no longer need to have your terminal open in order to borwse to your wiki.
