@@ -34,6 +34,18 @@ Parameters:
     Default: 0.0.0.0/0
     AllowedPattern: "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})"
     ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
+  Route53HostedZone:
+    Description: Select the domain you want this wiki to be associated with.
+    Type: AWS::Route53::HostedZone::Id
+    ConstraintDescription: Must be a valid domain
+  UrlName:
+    Description: |
+      This will set the subdomain. Type out the fully qualified url. 
+      For example, if your hosted zone domain name is yourdomain.com, type wiki.yourdomain.com. 
+      Where 'wiki' is whatever you want to call the subdomain.
+    Type: String
+    Default: wiki.example.com
+    ConstraintDescription: Must be a valif String
 
 Resources:
   ServerSecurityGroup:
@@ -74,7 +86,17 @@ Resources:
            yum install -y nodejs
            npm install -g tiddlywiki
            #sudo tiddlywiki wikiwiki --init server
-           ##sudo tiddlywiki wikiwiki --listen host=0.0.0.0 port=8080
+           ##sudo tiddlywiki wikiwiki --listen host=0.0.0.0 port=8080 port=80 username=admin password=admin
            #wget https://raw.githubusercontent.com/Juan007/cloudformation/master/TiddlyWiki/tiddlywikistartup -O /etc/init.d/tiddlywikistartup
            #chmod +x /etc/init.d/tiddlywikistartup
            #shutdown -r now
+  Url:
+    Type: AWS::Route53::RecordSet
+    Properties:      
+      Comment: DNS name for my instance.
+      Name: !Ref UrlName
+      HostedZoneId: !Ref Route53HostedZone
+      Type: A
+      TTL: 900
+      ResourceRecords:
+        - !GetAtt TiddlyWikiInstance.PublicIp
