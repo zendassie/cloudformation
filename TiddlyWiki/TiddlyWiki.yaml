@@ -47,7 +47,17 @@ Parameters:
       Where 'wiki' is whatever you want to call the subdomain.
     Type: String
     Default: wiki.example.com
-    ConstraintDescription: Must be a valif String
+    ConstraintDescription: Must be a valid String
+  WikiUsername:
+    Description: Username used to log into your new wiki site
+    Type: String
+    Default: admin
+    ConstraintDescription: Must be a valid String
+  WikiPassword:
+    Description: Password used to log into your new wiki site
+    NoEcho: true
+    Type: String
+    ConstraintDescription: Must be a valid String
 
 Resources:
   ServerSecurityGroup:
@@ -80,20 +90,23 @@ Resources:
       SecurityGroups:
         - !Ref ServerSecurityGroup
       UserData:
-        Fn::Base64: |
-           #!/bin/bash
-           yum update -y
-           yum install -y gcc-c++ make
-           curl -sL https://rpm.nodesource.com/setup_11.x | sudo -E bash -
-           yum install -y nodejs
-           npm install -g tiddlywiki
-           cd /home/ec2-user/
-           sudo tiddlywiki wikiwiki --init server
-           cd /etc/systemd/system/
-           sudo wget https://raw.githubusercontent.com/Juan007/cloudformation/master/TiddlyWiki/tiddlywiki.service
-           sudo chmod +x /etc/systemd/system/tiddlywiki.service
-           sudo systemctl enable tiddlywiki.service
-           sudo systemctl start tiddlywiki.service
+        Fn::Base64: 
+          !Sub |
+            #!/bin/bash
+            yum update -y
+            yum install -y gcc-c++ make
+            curl -sL https://rpm.nodesource.com/setup_11.x | sudo -E bash -
+            yum install -y nodejs
+            npm install -g tiddlywiki
+            cd /home/ec2-user/
+            sudo tiddlywiki wikiwiki --init server
+            cd /etc/systemd/system/
+            sudo wget https://raw.githubusercontent.com/Juan007/cloudformation/master/TiddlyWiki/tiddlywiki.service
+            sudo chmod +x /etc/systemd/system/tiddlywiki.service
+            sudo sed -i 's/_username/${WikiUsername}/g' tiddlywiki.service
+            sudo sed -i 's/_password/${WikiPassword}/g' tiddlywiki.service
+            sudo systemctl enable tiddlywiki.service
+            sudo systemctl start tiddlywiki.service
   Url:
     Type: AWS::Route53::RecordSet
     Properties:      
