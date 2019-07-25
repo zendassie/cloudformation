@@ -6,7 +6,7 @@ After=syslog.target
 SyslogIdentifier=tiddlywiki
 Restart=always
 StandardOutput=syslog
-ExecStart=/usr/bin/node /usr/lib/node_modules/tiddlywiki/tiddlywiki.js /home/ec2-user/wikiwiki --listen host=0.0.0.0 port=80 username=admin password=admin
+ExecStart=/usr/bin/node /usr/lib/node_modules/tiddlywiki/tiddlywiki.js /home/ec2-user/wikiwiki --listen host=0.0.0.0 port=80 username=_username password=_password
 
 [Install]
 WantedBy=multi-user.target
