@@ -1,9 +1,11 @@
-Description: | 
+Description: |
   This template creates an EC2 instance and pre-configures it to run TiddlyWiki on NodeJs. 
   !WARNING! You will be billed for the AWS resources used if you create a stack from this template.
   Be sure to review your billing estimates to avoid any nasty surprises!
   Guide to install TiddlyWiki:
   https://tiddlywiki.com/static/Installing%2520TiddlyWiki%2520on%2520Node.js.html
+  Running TiddlyWiki as a service: (I had to tweak it a little bit to work)
+  https://beroslingblade.wordpress.com/2015/06/20/tiddlywiki/
   TiddlyWiki startup commands:
   https://tiddlywiki.com/static/ListenCommand.html
 
@@ -88,8 +90,8 @@ Resources:
            cd /home/ec2-user/
            sudo tiddlywiki wikiwiki --init server
            cd /etc/systemd/system/
-           wget https://raw.githubusercontent.com/Juan007/cloudformation/master/TiddlyWiki/tiddlywiki.service -O
-           chmod +x /etc/init.d/tiddlywiki.service
+           sudo wget https://raw.githubusercontent.com/Juan007/cloudformation/master/TiddlyWiki/tiddlywiki.service
+           sudo chmod +x /etc/systemd/system/tiddlywiki.service
            sudo systemctl enable tiddlywiki.service
            sudo systemctl start tiddlywiki.service
   Url:
