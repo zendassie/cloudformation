@@ -85,11 +85,13 @@ Resources:
            curl -sL https://rpm.nodesource.com/setup_11.x | sudo -E bash -
            yum install -y nodejs
            npm install -g tiddlywiki
-           #sudo tiddlywiki wikiwiki --init server
-           ##sudo tiddlywiki wikiwiki --listen host=0.0.0.0 port=8080 port=80 username=admin password=admin
-           #wget https://raw.githubusercontent.com/Juan007/cloudformation/master/TiddlyWiki/tiddlywikistartup -O /etc/init.d/tiddlywikistartup
-           #chmod +x /etc/init.d/tiddlywikistartup
-           #shutdown -r now
+           cd /home/ec2-user/
+           sudo tiddlywiki wikiwiki --init server
+           cd /etc/systemd/system/
+           wget https://raw.githubusercontent.com/Juan007/cloudformation/master/TiddlyWiki/tiddlywiki.service -O
+           chmod +x /etc/init.d/tiddlywiki.service
+           sudo systemctl enable tiddlywiki.service
+           sudo systemctl start tiddlywiki.service
   Url:
     Type: AWS::Route53::RecordSet
     Properties:      
