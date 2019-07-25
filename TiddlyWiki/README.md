@@ -6,6 +6,7 @@ A CloudFormation template to launch a TiddlyWiki site
 1. An [AWS account](https://aws.amazon.com/#)
 1. A valid [EC2 Key Pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 1. A valid [Route53 Domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html)
+> Note: If you don't want to register a domain, simply delete the following sections: Under *Parameters*, delete the *Route53HostedZone* and *UrlName* sections. Under *Resources*, delete the *Url* section. Then once your stack has launch, head over to your EC2 instance and use the *AWS Public DNS* or *IPv4 Public IP* to navigate to your wiki.
 
 **Stack creation:**
 1. In AWS => [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.html), select *Create Stack*
