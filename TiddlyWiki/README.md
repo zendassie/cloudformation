@@ -2,6 +2,11 @@
 A CloudFormation template to launch a TiddlyWiki site
 
 ## How to use:
+**Prerequisite:**
+1. An [AWS account](https://aws.amazon.com/#)
+2. A valid [EC2 Key Pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
+3. A valid [Route53 Domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html)
+
 **Stack creation:**
 1. In AWS => CloudFormation, select *Create Stack*
 2. Select *Upload a template file* and upload the [TiddlyWiki.yaml](https://raw.githubusercontent.com/Juan007/cloudformation/master/TiddlyWiki/TiddlyWiki.yaml) file
